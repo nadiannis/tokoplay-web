@@ -14,5 +14,31 @@
 
 body {
   margin: 0;
-  @apply bg-gray-950 text-slate-50;
+  @apply bg-gray-950 text-slate-50 min-h-screen;
+}
+
+pre::-webkit-scrollbar {
+  @apply hidden;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray-700;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  @apply bg-gray-600;
 }
