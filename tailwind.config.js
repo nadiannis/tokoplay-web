@@ -12,10 +12,16 @@ export default {
       },
       colors: {
         shade: {
+          300: '#b3b7bd',
+          800: '#13161f',
           900: '#0e111a',
         },
       },
+      boxShadow: {
+        video:
+          '0 5px 10px 3px rgba(49, 46, 129, 0.3), 0 25px 50px -12px rgba(49, 46, 129, 0.4)',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
