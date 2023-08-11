@@ -1,28 +1,45 @@
-import Video from './video-card';
+import { useState, useEffect } from 'react';
+import axiosInstance from '../../utils/axiosInstance';
+import VideoCard from './video-card';
 
 export default function VideoList() {
+  const [isLoading, setisLoading] = useState(true);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    getVideos();
+  }, []);
+
+  const getVideos = async () => {
+    setisLoading(true);
+
+    try {
+      const response = await axiosInstance.get('/api/videos');
+      const { data } = response.data;
+
+      setVideos(data);
+      setisLoading(false);
+    } catch (error) {
+      console.log(error);
+      setisLoading(false);
+    }
+  };
+
   return (
     <div className="mt-5 flex flex-wrap">
-      <Video
-        video={{
-          imageUrl:
-            'https://images.unsplash.com/photo-1691175085195-a743156f9b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-        }}
-      />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
-      <Video />
+      {isLoading && (
+        <span className="block text-base text-center font-bold p-20 flex-auto">
+          Loading...
+        </span>
+      )}
+      {!isLoading && videos.length === 0 && (
+        <span className="block text-base text-center font-bold py-12 flex-auto">
+          There are no videos available
+        </span>
+      )}
+      {!isLoading &&
+        videos.length > 0 &&
+        videos.map((video) => <VideoCard key={video._id} video={video} />)}
     </div>
   );
 }
