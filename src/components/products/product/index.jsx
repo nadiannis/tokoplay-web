@@ -1,13 +1,21 @@
-export default function Product() {
+import PropTypes from 'prop-types';
+
+export default function Product({ product }) {
+  const { title, price, pageUrl } = product;
+
   return (
     <a
-      href="https://www.tokopedia.com/logitech/logitech-h111-headset-stereo-single-jack-3-5mm"
+      href={pageUrl}
       target="_blank"
       rel="noreferrer"
-      className="p-4 flex flex-col 2xl:flex-row justify-between gap-1.5 bg-gray-900 hover:bg-gray-800 active:bg-gray-800 text-slate-50 rounded-lg cursor-pointer transition-all"
+      className="p-4 flex flex-col 2xl:flex-row justify-between gap-2 bg-gray-900 hover:bg-gray-800 active:bg-gray-800 text-slate-50 rounded-lg cursor-pointer transition-all"
     >
-      <span className="font-bold text-sm">Product Name</span>
-      <span className="text-shade-300 text-xs 2xl:text-sm">Rp120000</span>
+      <span className="font-bold text-sm">{title}</span>
+      <span className="text-shade-300 text-xs">Rp{price}</span>
     </a>
   );
 }
+
+Product.propTypes = {
+  product: PropTypes.object.isRequired,
+};
