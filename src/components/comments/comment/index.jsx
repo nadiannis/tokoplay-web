@@ -1,11 +1,25 @@
-export default function Comment() {
+import PropTypes from 'prop-types';
+import * as dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+export default function Comment({ comment }) {
+  const { username, content, createdAt } = comment;
+
+  dayjs.extend(relativeTime);
+
   return (
     <div className="text-sm px-0 sm:px-4">
-      <h3 className="font-bold">username</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit,
-        ipsum nihil suscipit consequatur enim tempora?
-      </p>
+      <div className="flex items-center gap-2 flex-wrap">
+        <h3 className="font-bold">{username}</h3>
+        <span className="text-xs text-shade-300">
+          {dayjs(createdAt).fromNow()}
+        </span>
+      </div>
+      <p className="mt-1">{content}</p>
     </div>
   );
 }
+
+Comment.propTypes = {
+  comment: PropTypes.object.isRequired,
+};
