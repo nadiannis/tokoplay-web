@@ -8,7 +8,7 @@ export default function VideoCard({ video }) {
   const { _id, title, thumbnailUrl } = video;
 
   return (
-    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-1 md:px-2 mb-2 md:mb-4">
+    <div className="w-full sm:w-1/2 lg:w-1/3 px-1 md:px-2 mb-2 md:mb-4">
       <Link
         to={`/videos/${_id}`}
         className="block relative bg-gray-800 cursor-pointer rounded-lg"

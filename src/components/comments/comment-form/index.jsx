@@ -5,7 +5,7 @@ export default function CommentForm({
   errors,
   handleComment,
   handleInputChange,
-  isLoading,
+  isSubmitting,
   className = '',
 }) {
   return (
@@ -41,9 +41,9 @@ export default function CommentForm({
       </div>
       <button
         className="inline-block font-bold w-full px-3 py-2 rounded-full cursor-pointer mt-4 text-sm bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-600 text-slate-50 transition-all"
-        disabled={isLoading}
+        disabled={isSubmitting}
       >
-        {isLoading ? (
+        {isSubmitting ? (
           <span className="loading loading-ring loading-sm"></span>
         ) : (
           'Comment'
@@ -58,6 +58,6 @@ CommentForm.propTypes = {
   errors: PropTypes.object.isRequired,
   handleComment: PropTypes.func.isRequired,
   handleInputChange: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isSubmitting: PropTypes.bool.isRequired,
   className: PropTypes.string,
 };
