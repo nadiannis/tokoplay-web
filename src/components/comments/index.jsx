@@ -5,13 +5,15 @@ import SectionTitle from '../section-title';
 import CommentList from './comment-list';
 import CommentForm from './comment-form';
 import Modal from '../modal';
+import { validateCommentForm } from '../../utils/validateForm';
 
 export default function Comments() {
   const { videoId } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [comments, setComments] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
   const [comment, setComment] = useState({
     username: '',
     content: '',
@@ -42,10 +44,20 @@ export default function Comments() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const body = {
+      username: comment.username.trim(),
+      content: comment.content,
+    };
+    const { isValid, errors } = validateCommentForm(body);
+    setErrors(errors);
+    if (!isValid) {
+      return;
+    }
+
     try {
       const response = await axiosInstance.post(
         `/api/videos/${videoId}/comments`,
-        comment
+        body
       );
       const { data } = response.data;
 
@@ -58,7 +70,7 @@ export default function Comments() {
     }
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setComment({ ...comment, [name]: value });
   };
@@ -83,8 +95,9 @@ export default function Comments() {
       </div>
       <CommentForm
         comment={comment}
+        errors={errors}
         handleComment={handleComment}
-        handleChange={handleChange}
+        handleInputChange={handleInputChange}
         isSubmitting={isSubmitting}
         className="bg-gray-950 hidden lg:block"
       />
@@ -105,8 +118,9 @@ export default function Comments() {
             />
             <CommentForm
               comment={comment}
+              errors={errors}
               handleComment={handleComment}
-              handleChange={handleChange}
+              handleInputChange={handleInputChange}
               isSubmitting={isSubmitting}
             />
           </Modal>

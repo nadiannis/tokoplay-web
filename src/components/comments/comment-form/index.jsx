@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 
 export default function CommentForm({
   comment,
+  errors,
   handleComment,
-  handleChange,
+  handleInputChange,
   isLoading,
   className = '',
 }) {
@@ -18,10 +19,12 @@ export default function CommentForm({
           name="username"
           placeholder="Enter a username"
           value={comment.username}
-          onChange={handleChange}
+          onChange={handleInputChange}
           className="block p-2.5 w-full border-none bg-white bg-opacity-10 text-slate-50 text-sm rounded-lg"
         />
-        <span className="text-red-400 mt-2"></span>
+        {errors.username && (
+          <span className="text-red-400 text-sm mt-2">{errors.username}</span>
+        )}
       </div>
       <div className="mt-4">
         <textarea
@@ -29,10 +32,12 @@ export default function CommentForm({
           placeholder="Write a comment"
           rows="3"
           value={comment.content}
-          onChange={handleChange}
+          onChange={handleInputChange}
           className="block p-2.5 w-full border-none bg-white bg-opacity-10 text-slate-50 text-sm rounded-lg"
         ></textarea>
-        <span className="text-red-400 mt-2"></span>
+        {errors.content && (
+          <span className="text-red-400 text-sm mt-2">{errors.content}</span>
+        )}
       </div>
       <button
         className="inline-block font-bold w-full px-3 py-2 rounded-full cursor-pointer mt-4 text-sm bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-600 text-slate-50 transition-all"
@@ -50,8 +55,9 @@ export default function CommentForm({
 
 CommentForm.propTypes = {
   comment: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   handleComment: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   className: PropTypes.string,
 };
