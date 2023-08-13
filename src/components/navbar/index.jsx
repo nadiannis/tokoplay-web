@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { MdHome } from 'react-icons/md';
+import { useRouteMatch } from '../../hooks';
 import Container from '../container';
-import useRouteMatch from '../../hooks/useRouteMatch';
 
 export default function Navbar() {
   const routes = ['/', '/videos/:videoId'];

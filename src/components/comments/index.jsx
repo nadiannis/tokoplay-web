@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useGet, useInputs } from '../../hooks';
 import { validateCommentForm } from '../../utils/validateForm';
 import axiosInstance from '../../utils/axiosInstance';
 import mergeArraysWithoutDuplicates from '../../utils/mergeArraysWithoutDuplicates';
@@ -11,39 +12,25 @@ import Modal from '../modal';
 export default function Comments() {
   const { videoId } = useParams();
 
-  const [isLoading, setisLoading] = useState(true);
-  const [comments, setComments] = useState([]);
-  const [totalComments, setTotalComments] = useState(0);
+  const {
+    isLoading,
+    data: comments,
+    errors: fetchCommentsErrors,
+    totalData: totalComments,
+    setData: setComments,
+    setTotalData: setTotalComments,
+  } = useGet(`/api/videos/${videoId}/comments?sort=recent`, videoId, []);
+  const {
+    values: comment,
+    handleInputChange,
+    reset,
+  } = useInputs({ username: '', content: '' });
+
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
-  const [comment, setComment] = useState({
-    username: '',
-    content: '',
-  });
-
-  useEffect(() => {
-    getComments(videoId);
-  }, [videoId]);
-
-  const getComments = async (videoId) => {
-    setisLoading(true);
-
-    try {
-      const response = await axiosInstance.get(
-        `/api/videos/${videoId}/comments?sort=recent&page=${page}`
-      );
-      const data = response.data;
-
-      setComments(data.data);
-      setTotalComments(data.count);
-      setisLoading(false);
-    } catch (error) {
-      console.log(error);
-      setisLoading(false);
-    }
-  };
 
   const fetchMoreComments = async (videoId, page) => {
     try {
@@ -86,26 +73,29 @@ export default function Comments() {
 
       setComments((prevComments) => [data, ...prevComments]);
       setTotalComments((prevTotalComments) => prevTotalComments + 1);
-      setComment({ username: '', content: '' });
       setIsSubmitting(false);
+      reset();
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setComment({ ...comment, [name]: value });
-  };
-
   console.log(page, hasMore, comments.length);
+
+  if (fetchCommentsErrors) {
+    return (
+      <span className="block text-sm text-center font-bold py-12">
+        Something went wrong
+      </span>
+    );
+  }
 
   return (
     <>
       <div>
         <SectionTitle
-          title={`Comments (${totalComments})`}
+          title={`Comments (${totalComments ? totalComments : '...'})`}
           className="px-4 mt-6 mb-2 lg:my-4"
         />
         {isLoading && (
@@ -141,7 +131,10 @@ export default function Comments() {
         >
           See All Comments
         </button>
-        <Modal id="commentModal" title={`Comments (${totalComments})`}>
+        <Modal
+          id="commentModal"
+          title={`Comments (${totalComments ? totalComments : '...'})`}
+        >
           {isLoading && (
             <span className="loading loading-ring loading-lg block lg:hidden mx-auto my-14"></span>
           )}

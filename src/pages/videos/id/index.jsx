@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axiosInstance from '../../../utils/axiosInstance';
+import { useGet } from '../../../hooks';
 import Container from '../../../components/container';
 import Products from '../../../components/products';
 import Comments from '../../../components/comments';
@@ -8,29 +7,19 @@ import Comments from '../../../components/comments';
 export default function VideoDetailPage() {
   const { videoId } = useParams();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [video, setVideo] = useState(null);
-  const [products, setProducts] = useState([]);
+  const {
+    isLoading,
+    data: video,
+    errors,
+  } = useGet(`/api/videos/${videoId}`, videoId);
 
-  useEffect(() => {
-    getVideo(videoId);
-  }, [videoId]);
-
-  const getVideo = async (id) => {
-    setIsLoading(true);
-
-    try {
-      const response = await axiosInstance.get(`/api/videos/${id}`);
-      const { data } = response.data;
-
-      setVideo(data);
-      setProducts(data.products);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
+  if (errors) {
+    return (
+      <span className="block text-sm text-center font-bold py-12">
+        Something went wrong
+      </span>
+    );
+  }
 
   return (
     <div
@@ -63,7 +52,7 @@ export default function VideoDetailPage() {
             </div>
           </section>
           <section className="2xl:w-80 2xl:h-full lg:mr-80 2xl:mr-0 shadow-xl bg-gray-950 2xl:fixed top-[53px] bottom-0 left-0 2xl:z-50">
-            <Products products={products} />
+            <Products products={video.products} />
           </section>
           <section className="w-full lg:h-full lg:w-80 shadow-xl bg-gray-950 lg:fixed top-[53px] bottom-0 right-0 lg:z-50 flex flex-col justify-between">
             <Comments />

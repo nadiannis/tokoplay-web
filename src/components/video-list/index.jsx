@@ -1,32 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useGetAll } from '../../hooks';
 import axiosInstance from '../../utils/axiosInstance';
 import VideoCard from './video-card';
 
 export default function VideoList() {
-  const [isLoading, setisLoading] = useState(true);
-  const [videos, setVideos] = useState([]);
+  const {
+    isLoading,
+    data: videos,
+    errors,
+    setData: setVideos,
+  } = useGetAll('/api/videos?sort=recent', []);
+
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    getVideos();
-  }, []);
-
-  const getVideos = async () => {
-    setisLoading(true);
-
-    try {
-      const response = await axiosInstance.get('/api/videos?sort=recent');
-      const { data } = response.data;
-
-      setVideos(data);
-      setisLoading(false);
-    } catch (error) {
-      console.log(error);
-      setisLoading(false);
-    }
-  };
 
   const fetchMoreVideos = async (page) => {
     try {
@@ -44,6 +31,14 @@ export default function VideoList() {
   };
 
   console.log(page);
+
+  if (errors) {
+    return (
+      <span className="block text-sm text-center font-bold py-12">
+        Something went wrong
+      </span>
+    );
+  }
 
   return (
     <>
