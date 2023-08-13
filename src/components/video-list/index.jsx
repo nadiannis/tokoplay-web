@@ -10,7 +10,7 @@ export default function VideoList() {
     data: videos,
     errors,
     setData: setVideos,
-  } = useGetAll('/api/videos?sort=recent', []);
+  } = useGetAll('/api/videos?sort=recent&limit=15', []);
 
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -18,7 +18,7 @@ export default function VideoList() {
   const fetchMoreVideos = async (page) => {
     try {
       const response = await axiosInstance.get(
-        `/api/videos?sort=recent&page=${page}`
+        `/api/videos?sort=recent&limit=15&page=${page}`
       );
       const data = response.data;
 
