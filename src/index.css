@@ -54,13 +54,13 @@ pre {
 
 @media (max-width: 536px) {
   .thumbnail {
-    @apply h-44;
+    @apply h-48;
   }
 }
 
 @media (max-width: 382px) {
   .thumbnail {
-    @apply h-28;
+    @apply h-36;
   }
 }
 
