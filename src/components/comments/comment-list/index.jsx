@@ -11,7 +11,7 @@ export default function CommentList({
   return (
     <div
       id="commentList"
-      className={`comment-list-height overflow-x-hidden overflow-y-auto pb-16 flex flex-col-reverse  ${className}`}
+      className={`comment-list-height overflow-x-hidden overflow-y-auto rounded-lg pb-16 shadow-inner shadow-black flex flex-col-reverse ${className}`}
     >
       <InfiniteScroll
         scrollableTarget="commentList"
@@ -22,7 +22,7 @@ export default function CommentList({
         next={fetchMore}
         useWindow={false}
         loader={
-          <span className="loading loading-ring loading-lg hidden lg:block mx-auto my-14"></span>
+          <span className="loading loading-ring loading-lg hidden lg:block mx-auto my-14 rounded-lg"></span>
         }
       >
         {comments.map((comment) => (

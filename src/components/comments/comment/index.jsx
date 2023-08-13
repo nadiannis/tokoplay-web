@@ -8,7 +8,7 @@ export default function Comment({ comment }) {
   dayjs.extend(relativeTime);
 
   return (
-    <div className="text-sm px-0 sm:px-4">
+    <div className="text-sm px-4">
       <div className="flex items-center gap-2 flex-wrap">
         <h3 className="font-bold">{username}</h3>
         <span className="text-xs text-shade-300">

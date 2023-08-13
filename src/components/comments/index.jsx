@@ -7,7 +7,7 @@ import mergeArraysWithoutDuplicates from '../../utils/mergeArraysWithoutDuplicat
 import SectionTitle from '../section-title';
 import CommentList from './comment-list';
 import CommentForm from './comment-form';
-import Modal from '../modal';
+// import Modal from '../modal';
 
 export default function Comments() {
   const { videoId } = useParams();
@@ -95,14 +95,14 @@ export default function Comments() {
     <>
       <div>
         <SectionTitle
-          title={`Comments (${totalComments ? totalComments : '...'})`}
+          title={`Comments (${totalComments})`}
           className="px-4 mt-6 mb-2 lg:my-4"
         />
         {isLoading && (
-          <span className="loading loading-ring loading-lg hidden lg:block mx-auto my-14"></span>
+          <span className="block loading loading-ring loading-lg mx-auto my-14"></span>
         )}
         {!isLoading && comments.length === 0 && (
-          <span className="text-sm text-center font-bold py-12 hidden lg:block">
+          <span className="block text-sm text-center font-bold py-4">
             There are no comments available
           </span>
         )}
@@ -111,7 +111,7 @@ export default function Comments() {
             comments={comments}
             hasMore={hasMore}
             fetchMore={() => fetchMoreComments(videoId, page + 1)}
-            className="hidden lg:flex"
+            className="mx-4 pt-4 bg-gray-900 lg:mx-0 lg:pt-0 lg:bg-gray-950"
           />
         )}
       </div>
@@ -121,45 +121,8 @@ export default function Comments() {
         handleComment={handleComment}
         handleInputChange={handleInputChange}
         isSubmitting={isSubmitting}
-        className="bg-gray-950 hidden lg:block"
+        className="bg-gray-950 lg:sticky lg:bottom-0 lg:z-50"
       />
-
-      <div className="block lg:hidden bg-gray-950 px-4 py-1.5">
-        <button
-          onClick={() => window.commentModal.showModal()}
-          className="inline-block font-bold w-full px-3 py-2 rounded-full cursor-pointer text-sm bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-600 text-slate-50 transition-all"
-        >
-          See All Comments
-        </button>
-        <Modal
-          id="commentModal"
-          title={`Comments (${totalComments ? totalComments : '...'})`}
-        >
-          {isLoading && (
-            <span className="loading loading-ring loading-lg block lg:hidden mx-auto my-14"></span>
-          )}
-          {!isLoading && comments.length === 0 && (
-            <span className="block text-sm text-center font-bold py-12">
-              There are no comments available
-            </span>
-          )}
-          {!isLoading && comments.length > 0 && (
-            <CommentList
-              comments={comments}
-              hasMore={hasMore}
-              fetchMore={() => fetchMoreComments(videoId, page + 1)}
-              className="flex"
-            />
-          )}
-          <CommentForm
-            comment={comment}
-            errors={errors}
-            handleComment={handleComment}
-            handleInputChange={handleInputChange}
-            isSubmitting={isSubmitting}
-          />
-        </Modal>
-      </div>
     </>
   );
 }

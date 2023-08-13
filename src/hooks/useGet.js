@@ -5,7 +5,7 @@ export default function useGet(url, id, initialData = null) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(initialData);
   const [errors, setErrors] = useState(null);
-  const [totalData, setTotalData] = useState(null);
+  const [totalData, setTotalData] = useState(0);
 
   useEffect(() => {
     const getData = async () => {
@@ -15,7 +15,7 @@ export default function useGet(url, id, initialData = null) {
         const response = await axiosInstance.get(url);
         setData(response.data.data);
         setErrors(null);
-        setTotalData(response.data.count ? response.data.count : null);
+        setTotalData(response.data.count ? response.data.count : 0);
       } catch (error) {
         setErrors(error);
         setData(initialData);

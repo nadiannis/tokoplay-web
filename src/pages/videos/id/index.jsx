@@ -54,7 +54,7 @@ export default function VideoDetailPage() {
           <section className="2xl:w-80 2xl:h-full lg:mr-80 2xl:mr-0 shadow-xl bg-gray-950 2xl:fixed top-[53px] bottom-0 left-0 2xl:z-50">
             <Products products={video.products} />
           </section>
-          <section className="w-full lg:h-full lg:w-80 shadow-xl bg-gray-950 lg:fixed top-[53px] bottom-0 right-0 lg:z-50 flex flex-col justify-between">
+          <section className="w-full lg:w-80 lg:h-full shadow-xl bg-gray-950 lg:fixed top-[53px] bottom-0 right-0 lg:z-50 flex flex-col justify-between">
             <Comments />
           </section>
         </>

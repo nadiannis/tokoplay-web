@@ -11,7 +11,7 @@ export default function CommentForm({
   return (
     <form
       onSubmit={handleComment}
-      className={`w-full p-0 sm:p-4 sm:pt-0 sticky bottom-0 z-50 ${className}`}
+      className={`w-full p-4 sm:pt-0 ${className}`}
     >
       <div className="mt-4">
         <input
