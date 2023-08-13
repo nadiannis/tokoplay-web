@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import * as dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs/esm';
+import relativeTime from 'dayjs/esm/plugin/relativeTime';
 
 export default function Comment({ comment }) {
   const { username, content, createdAt } = comment;
