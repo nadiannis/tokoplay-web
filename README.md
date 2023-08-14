@@ -32,6 +32,7 @@ Check out the web version of **Tokoplay** here: [tokoplay.vercel.app](https://to
 [`^ back to top ^`](#table-of-contents)
 
 - Display list of videos with infinite scroll
+- Search videos with debouncing
 - Show detail of a video
 - Display products of a video
 - Display comments of a video with infinite scroll
