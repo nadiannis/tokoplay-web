@@ -8,7 +8,7 @@ export default function NotFoundPage() {
         <div className="mt-10">
           <Link
             to="/"
-            className="block mt-8 text-sm text-gray-300 underline hover:no-underline active:no-underline"
+            className="link text-sm text-gray-300 hover:no-underline active:no-underline"
           >
             Back to Home
           </Link>

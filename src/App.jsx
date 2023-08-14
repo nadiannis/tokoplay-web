@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/main-layout';
 import HomePage from './pages';
 import VideoDetailPage from './pages/videos/id';
-import NotFoundPage from './pages/not-found';
 import SearchPage from './pages/search';
+import NotFoundPage from './pages/not-found';
 
 export default function App() {
   return (

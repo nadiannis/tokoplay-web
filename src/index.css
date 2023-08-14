@@ -43,6 +43,14 @@ pre {
   @apply bg-gray-600;
 }
 
+.btn {
+  @apply text-sm normal-case;
+}
+
+.btn-primary {
+  @apply hover:bg-indigo-600 active:bg-indigo-600 text-slate-50 outline-indigo-400 hover:outline-indigo-500 active:outline-indigo-500;
+}
+
 .comment-list-height {
   @apply max-h-72;
   min-height: 6rem;

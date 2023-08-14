@@ -11,7 +11,7 @@ export default function CommentList({
   return (
     <div
       id="commentList"
-      className={`comment-list-height overflow-x-hidden overflow-y-auto rounded-lg pb-16 shadow-inner shadow-black flex flex-col-reverse ${className}`}
+      className={`comment-list-height overflow-x-hidden overflow-y-auto rounded-lg pb-16 lg:pb-24 shadow-inner shadow-black flex flex-col-reverse ${className}`}
     >
       <InfiniteScroll
         scrollableTarget="commentList"

@@ -7,7 +7,6 @@ import mergeArraysWithoutDuplicates from '../../utils/mergeArraysWithoutDuplicat
 import SectionTitle from '../section-title';
 import CommentList from './comment-list';
 import CommentForm from './comment-form';
-// import Modal from '../modal';
 
 export default function Comments() {
   const { videoId } = useParams();

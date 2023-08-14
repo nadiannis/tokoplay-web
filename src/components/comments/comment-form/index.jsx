@@ -20,7 +20,9 @@ export default function CommentForm({
           placeholder="Enter a username"
           value={comment.username}
           onChange={handleInputChange}
-          className="block p-2.5 w-full border-none bg-white bg-opacity-10 text-slate-50 text-sm rounded-lg"
+          className={`input w-full bg-white bg-opacity-10 text-slate-50 focus:border-white text-sm rounded-full ${
+            errors.username && 'input-error'
+          }`}
         />
         {errors.username && (
           <span className="text-red-400 text-sm mt-2">{errors.username}</span>
@@ -33,14 +35,16 @@ export default function CommentForm({
           rows="3"
           value={comment.content}
           onChange={handleInputChange}
-          className="block p-2.5 w-full border-none bg-white bg-opacity-10 text-slate-50 text-sm rounded-lg"
+          className={`textarea w-full p-2.5 bg-white bg-opacity-10 text-slate-50 focus:border-white text-sm rounded-2xl ${
+            errors.content && 'textarea-error'
+          }`}
         ></textarea>
         {errors.content && (
           <span className="text-red-400 text-sm mt-2">{errors.content}</span>
         )}
       </div>
       <button
-        className="inline-block font-bold w-full px-3 py-2 rounded-full cursor-pointer mt-4 text-sm bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-600 text-slate-50 transition-all"
+        className="btn btn-active btn-primary btn-circle w-full mt-4"
         disabled={isSubmitting}
       >
         {isSubmitting ? (

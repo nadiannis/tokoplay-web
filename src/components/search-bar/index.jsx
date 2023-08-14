@@ -7,7 +7,7 @@ export default function SearchBar({ handleInputChange }) {
         type="text"
         onChange={handleInputChange}
         placeholder="What are you looking for?"
-        className="bg-gray-900 border-none rounded-full text-sm w-full h-12 px-8 py-3 placeholder:text-gray-400 text-slate-50"
+        className="input w-full text-sm px-7 bg-gray-900 placeholder:text-gray-400 focus:border-white text-slate-50 rounded-full"
       />
     </form>
   );

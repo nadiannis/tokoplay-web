@@ -1,46 +1,8 @@
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
-// import axiosInstance from '../../utils/axiosInstance';
 import VideoCard from './video-card';
-// import mergeArraysWithoutDuplicates from '../../utils/mergeArraysWithoutDuplicates';
 
-export default function VideoList({
-  videos,
-  // setVideos,
-  // page,
-  // setPage,
-  hasMore,
-  next,
-  // setHasMore,
-  isLoading,
-  // errors,
-  // searchQuery = '',
-}) {
-  // const fetchMoreVideos = async (page) => {
-  //   try {
-  //     const response = await axiosInstance.get(
-  //       `/api/videos?sort=recent&limit=15&page=${page}&q=${searchQuery}`
-  //     );
-  //     const data = response.data;
-  //     const newVideos = mergeArraysWithoutDuplicates(videos, data.data);
-  //     setVideos(newVideos);
-  //     setPage(page);
-  //     setHasMore(page < data.totalPages);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // if (errors) {
-  //   return (
-  //     <span className="block text-sm text-center font-bold py-12">
-  //       Something went wrong
-  //     </span>
-  //   );
-  // }
-
-  // console.log('page number in video list:', page);
-
+export default function VideoList({ videos, hasMore, next, isLoading }) {
   return (
     <>
       {isLoading && (

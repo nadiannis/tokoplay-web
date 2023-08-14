@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const fallbackImageUrl =
-  'https://images.unsplash.com/photo-1690921349852-7694d2b2c447?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80';
+const fallbackThumbnailUrl =
+  'https://images.unsplash.com/photo-1545805523-ccfc8657d739?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80';
 
 export default function VideoCard({ video }) {
   const { _id, title, thumbnailUrl } = video;
@@ -15,7 +15,7 @@ export default function VideoCard({ video }) {
       >
         <div className="thumbnail">
           <img
-            src={thumbnailUrl || fallbackImageUrl}
+            src={thumbnailUrl || fallbackThumbnailUrl}
             alt={title}
             className="w-full h-full object-cover rounded-lg"
           />

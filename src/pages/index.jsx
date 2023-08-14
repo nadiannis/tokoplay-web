@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Container from '../components/container';
-import VideoList from '../components/video-list';
 import axiosInstance from '../utils/axiosInstance';
 import mergeArraysWithoutDuplicates from '../utils/mergeArraysWithoutDuplicates';
+import Container from '../components/container';
+import VideoList from '../components/video-list';
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +58,7 @@ export default function HomePage() {
   console.log('page number in home page:', page);
 
   return (
-    <Container>
+    <Container className="pb-10">
       <h1 className="font-bold text-2xl mt-4 sm:mt-5 px-1 sm:px-2">Browse</h1>
       <VideoList
         videos={videos}
