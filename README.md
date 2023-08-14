@@ -1,5 +1,7 @@
 <div align="center">
-  <br>
+<br>
+  <a href="https://tokoplay.vercel.app"><img width="140" height="140" src="./public/android-chrome-512x512.png"></a>
+  <br><br>
   <h1>Tokoplay Web</h1>
   <p>Promote products through videos</p>
   <br>
@@ -19,7 +21,7 @@
 
 [`^ back to top ^`](#table-of-contents)
 
-**Tokoplay** is a platform where seller can promote products through videos to potential buyers. It is a simple clone of Tokopedia Play. This repo is the frontend of the app. It is built with [React.js](https://react.dev).
+**Tokoplay** is a platform where seller can promote products through videos to potential buyers. It is a simple clone of Tokopedia Play. It is built for the final project of Generasi GIGIH 3.0. This repo is the frontend of the app. It is built with [React.js](https://react.dev). You can see the API in [this repo](https://github.com/nadiannis/tokoplay-api).
 
 ## Live Demo
 
@@ -31,12 +33,15 @@ Check out the web version of **Tokoplay** here: [tokoplay.vercel.app](https://to
 
 [`^ back to top ^`](#table-of-contents)
 
-- Display list of videos with infinite scroll
-- Search videos with debouncing
+These are the features of the app. Features marked with _`(additional)`_ are features I added that are not included in the minimum requirements.
+
+- Display list of videos
+- Search videos with debouncing _(additional)_
 - Show detail of a video
 - Display products of a video
-- Display comments of a video with infinite scroll
+- Display comments of a video
 - Add a comment to a video
+- Implement infinite scroll for list of videos & comments _(additional)_
 
 ## Tech Stack
 
