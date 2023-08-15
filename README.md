@@ -16,6 +16,10 @@
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Run Locally](#run-locally)
+  - [Getting Started](#getting-started)
+  - [Development](#development)
+  - [Production](#production)
+  - [Linting & Formatting](#linting-formatting)
 
 ## Description
 
