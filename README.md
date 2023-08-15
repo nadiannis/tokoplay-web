@@ -19,7 +19,7 @@
   - [Getting Started](#getting-started)
   - [Development](#development)
   - [Production](#production)
-  - [Linting & Formatting](#linting-formatting)
+  - [Linting & Formatting](#linting--formatting)
 
 ## Description
 
