@@ -4,8 +4,8 @@ import axiosInstance from '../utils/axiosInstance';
 export default function useGet(url, id, initialData = null) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(initialData);
-  const [errors, setErrors] = useState(null);
   const [totalData, setTotalData] = useState(0);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -14,10 +14,10 @@ export default function useGet(url, id, initialData = null) {
       try {
         const response = await axiosInstance.get(url);
         setData(response.data.data);
-        setErrors(null);
         setTotalData(response.data.count ? response.data.count : 0);
+        setError(null);
       } catch (error) {
-        setErrors(error);
+        setError(error);
         setData(initialData);
         setTotalData(null);
       } finally {
@@ -31,11 +31,11 @@ export default function useGet(url, id, initialData = null) {
   return {
     isLoading,
     data,
-    errors,
     totalData,
+    error,
     setIsLoading,
     setData,
-    setErrors,
     setTotalData,
+    setError,
   };
 }

@@ -7,8 +7,9 @@ import VideoList from '../components/video-list';
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [videos, setVideos] = useState(null);
   const [hasMore, setHasMore] = useState(true);
+  const [videos, setVideos] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (page > 1) {
@@ -29,8 +30,11 @@ export default function HomePage() {
 
       setVideos(data.data);
       setHasMore(page < data.totalPages);
+      setError(null);
     } catch (error) {
       console.log(error);
+      setError(error);
+      setVideos(null);
     } finally {
       setIsLoading(false);
     }
@@ -46,8 +50,11 @@ export default function HomePage() {
 
       setVideos(newVideos);
       setHasMore(page < data.totalPages);
+      setError(null);
     } catch (error) {
       console.log(error);
+      setError(error);
+      setVideos(null);
     }
   };
 
@@ -55,7 +62,13 @@ export default function HomePage() {
     setPage(page + 1);
   };
 
-  console.log('page number in home page:', page);
+  if (error) {
+    return (
+      <span className="block text-sm text-center font-bold py-12">
+        Something went wrong
+      </span>
+    );
+  }
 
   return (
     <Container className="pb-10">

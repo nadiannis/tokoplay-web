@@ -14,7 +14,7 @@ export default function Comments() {
   const {
     isLoading,
     data: comments,
-    errors: fetchCommentsErrors,
+    error: fetchCommentsError,
     totalData: totalComments,
     setData: setComments,
     setTotalData: setTotalComments,
@@ -27,7 +27,6 @@ export default function Comments() {
 
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -37,8 +36,8 @@ export default function Comments() {
         `/api/videos/${videoId}/comments?sort=recent&page=${page}`
       );
       const data = response.data;
-
       const newComments = mergeArraysWithoutDuplicates(comments, data.data);
+
       setComments(newComments);
       setTotalComments(data.count);
       setPage(page);
@@ -69,8 +68,9 @@ export default function Comments() {
         body
       );
       const { data } = response.data;
+      const newComments = mergeArraysWithoutDuplicates(data, comments);
 
-      setComments((prevComments) => [data, ...prevComments]);
+      setComments(newComments);
       setTotalComments((prevTotalComments) => prevTotalComments + 1);
       setIsSubmitting(false);
       reset();
@@ -80,9 +80,7 @@ export default function Comments() {
     }
   };
 
-  console.log(page, hasMore, comments.length);
-
-  if (fetchCommentsErrors) {
+  if (fetchCommentsError) {
     return (
       <span className="block text-sm text-center font-bold py-12">
         Something went wrong

@@ -7,11 +7,12 @@ import SearchBar from '../../components/search-bar';
 import VideoList from '../../components/video-list';
 
 export default function SearchPage() {
-  const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [videos, setVideos] = useState(null);
   const [hasMore, setHasMore] = useState(false);
+  const [videos, setVideos] = useState(null);
+  const [error, setError] = useState(null);
 
   const debouncedQuery = useDebounce(query);
 
@@ -39,8 +40,11 @@ export default function SearchPage() {
 
       setVideos(data.data);
       setHasMore(page < data.totalPages);
+      setError(null);
     } catch (error) {
       console.log(error);
+      setError(error);
+      setVideos(null);
     } finally {
       setIsLoading(false);
     }
@@ -56,8 +60,11 @@ export default function SearchPage() {
 
       setVideos(newVideos);
       setHasMore(page < data.totalPages);
+      setError(null);
     } catch (error) {
       console.log(error);
+      setError(error);
+      setVideos(null);
     }
   };
 
@@ -69,8 +76,13 @@ export default function SearchPage() {
     setPage(page + 1);
   };
 
-  console.log('hasMore in search page:', hasMore);
-  console.log('page number in search page:', page);
+  if (error) {
+    return (
+      <span className="block text-sm text-center font-bold py-12">
+        Something went wrong
+      </span>
+    );
+  }
 
   return (
     <Container className="pb-10">

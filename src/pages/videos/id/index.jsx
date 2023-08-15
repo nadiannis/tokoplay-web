@@ -10,10 +10,10 @@ export default function VideoDetailPage() {
   const {
     isLoading,
     data: video,
-    errors,
+    error,
   } = useGet(`/api/videos/${videoId}`, videoId);
 
-  if (errors) {
+  if (error) {
     return (
       <span className="block text-sm text-center font-bold py-12">
         Something went wrong
