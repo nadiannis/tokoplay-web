@@ -68,9 +68,8 @@ export default function Comments() {
         body
       );
       const { data } = response.data;
-      const newComments = mergeArraysWithoutDuplicates(data, comments);
 
-      setComments(newComments);
+      setComments((prevComments) => [data, ...prevComments]);
       setTotalComments((prevTotalComments) => prevTotalComments + 1);
       setIsSubmitting(false);
       reset();
